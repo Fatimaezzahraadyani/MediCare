@@ -1,12 +1,12 @@
 package web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,11 +47,11 @@ public class RegistrationServlet extends HttpServlet {
 		String telephone = request.getParameter("telephone");
 		String mot_de_passe = request.getParameter("password");
 		String role = request.getParameter("role");
-		
-		
+		RequestDispatcher dispatcher = null;
+		Connection con = null ;
 		try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Charger le driver JDBC
-            Connection con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/doctorrv","root","admin");
+            con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/doctorRv","root","admin");
             PreparedStatement stm = con.prepareStatement("insert into user(username,email,telephone,mot_de_passe,role) values (?,?,?,?,?)");
             stm.setString(1, username);
             stm.setString(2, email);
@@ -59,13 +59,29 @@ public class RegistrationServlet extends HttpServlet {
             stm.setString(4, mot_de_passe);
             stm.setString(5, role);
             
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("Driver JDBC non trouvé !", e);
+            int rowCount = stm.executeUpdate(); 
+            dispatcher = request.getRequestDispatcher("register.jsp");
+            if(rowCount > 0){
+            	request.setAttribute("status ", "success");
+        }else {
+        	request.setAttribute("status ", "failed");
+        } 
+            dispatcher.forward(request,response); 
+		}catch (Exception e) {
+			e.printStackTrace();
+            //throw new SQLException("Driver JDBC non trouvé !", e);
+        }finally {
+        try {
+        con.close();
+        } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        } 
         }
     }
 }
 		//PrintWriter out = response.getWriter();
 		//out.print("working");
-	}
+	
 
-}
+
