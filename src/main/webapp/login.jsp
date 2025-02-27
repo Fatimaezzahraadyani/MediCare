@@ -9,6 +9,8 @@
 </head>
 <body class="d-flex align-items-center justify-content-center vh-100 bg-light">
 
+<input type ="hidden" id="status" value="<% request.getAttribute("status");%>">
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">

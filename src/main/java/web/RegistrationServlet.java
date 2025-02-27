@@ -31,7 +31,8 @@ public class RegistrationServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -51,7 +52,7 @@ public class RegistrationServlet extends HttpServlet {
 		Connection con = null ;
 		try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Charger le driver JDBC
-            con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/doctorRv","root","admin");
+            con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/doctorRv?useSSL=false","root","admin");
             PreparedStatement stm = con.prepareStatement("insert into user(username,email,telephone,mot_de_passe,role) values (?,?,?,?,?)");
             stm.setString(1, username);
             stm.setString(2, email);
