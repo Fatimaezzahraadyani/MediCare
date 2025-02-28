@@ -65,10 +65,11 @@ public class LoginServlet extends HttpServlet {
 	           
 	          ResultSet rs = stm.executeQuery();
 	        if(rs.next()) {
-	        	session.setAttribute("name", rs.getString("name"));
-	        	PrintWriter out = response.getWriter();
-	    		out.print("working");
-	        	//dispatcher = request.getRequestDispatcher("hello dear");
+	        	session.setAttribute("username", rs.getString("username"));
+	        	
+	        	//PrintWriter out = response.getWriter();
+	    		//out.print("hello patient");
+	        	dispatcher = request.getRequestDispatcher("home.jsp");
 	        }else {
 	        	request.setAttribute("status", "failed");
 	        	dispatcher = request.getRequestDispatcher("login.jsp");

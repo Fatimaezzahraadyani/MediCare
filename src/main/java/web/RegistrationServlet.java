@@ -61,7 +61,7 @@ public class RegistrationServlet extends HttpServlet {
             stm.setString(5, role);
             
             int rowCount = stm.executeUpdate(); 
-            dispatcher = request.getRequestDispatcher("register.jsp");
+            dispatcher = request.getRequestDispatcher("login.jsp");
             if(rowCount > 0){
             	request.setAttribute("status ", "success");
         }else {

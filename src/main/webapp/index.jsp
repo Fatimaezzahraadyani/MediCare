@@ -1,9 +1,6 @@
-
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <% 
-	if(session.getAttribute("name") == null){
-		response.sendRedirect("login.jsp");
-	}
+	
 %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,7 +13,7 @@
 <body class="d-flex align-items-center justify-content-center vh-100 bg-light">
 
     <div class="container text-center">
-        <h1 class="mb-4">Bienvenue sur notre plateforme médocale</h1>
+        <h1 class="mb-4">Bienvenue sur notre plateforme médicale</h1>
         <p class="lead">Veuillez vous connecter ou créer un compte pour accéder à nos services.</p>
 
         <div class="mt-4">
